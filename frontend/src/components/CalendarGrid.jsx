@@ -5,30 +5,31 @@ import DayCell from './DayCell';
 import DayModal from './DayModal';
 
 export default function CalendarGrid() {
-  const [month, setMonth] = useState(dayjs().format('YYYY-MM')); // e.g. 2025-09
+  const [month, setMonth] = useState(dayjs().format('YYYY-MM'));
   const [events, setEvents] = useState([]);
   const [selectedDay, setSelectedDay] = useState(null);
 
   useEffect(() => { fetchEvents(); }, [month]);
 
   const fetchEvents = async () => {
-    const res = await api.get('/events', { params: { month }});
-    setEvents(res.data);
+    try {
+      const res = await api.get('/events', { params: { month }});
+      setEvents(res.data);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
-  // Build month grid dates
   const monthStart = dayjs(month + '-01');
-  const startWeekDay = monthStart.startOf('month').day(); // 0 Sun .. 6 Sat
+  const startWeekDay = monthStart.startOf('month').day();
   const daysInMonth = monthStart.daysInMonth();
 
   const gridCells = [];
-  // leading blanks
   for (let i = 0; i < startWeekDay; i++) gridCells.push(null);
   for (let d = 1; d <= daysInMonth; d++) {
     const date = monthStart.date(d).format('YYYY-MM-DD');
     gridCells.push({ date, day: d });
   }
-  // ensure multiple of 7
   while (gridCells.length % 7 !== 0) gridCells.push(null);
 
   const eventsByDate = events.reduce((acc, ev) => {

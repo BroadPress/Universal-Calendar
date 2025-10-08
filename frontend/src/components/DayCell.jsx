@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function DayCell({ cell, events, onOpen }) {
-  if (!cell) return <div className="h-28"></div>; // blank cell
+  if (!cell) return <div className="h-28"></div>;
 
   return (
     <div className="min-h-28 p-3 bg-transparent rounded cursor-pointer" onClick={onOpen}>
