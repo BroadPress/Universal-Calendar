@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import { demoEvents } from "../data/demoEvents"; // ✅ Import demo events
+import dayjs from "dayjs";
 
 const Sidebar = () => {
   const [weekday, setWeekday] = useState('');
@@ -11,18 +12,15 @@ const Sidebar = () => {
   ];
 
   useEffect(() => {
-    const fetchTodayEvents = async () => {
+    const fetchTodayEvents = () => {
       const today = new Date();
-      const formattedToday = today.toISOString().split('T')[0]; // "YYYY-MM-DD"
+      const formattedToday = dayjs(today).format('YYYY-MM-DD'); // "YYYY-MM-DD"
       const dayName = today.toLocaleDateString('en-US', { weekday: 'long' }).toUpperCase();
       setWeekday(dayName);
 
-      try {
-        const res = await axios.get(`http://localhost:5000/api/events/day/${formattedToday}`);
-        setTodaysEvents(res.data);
-      } catch (err) {
-        console.error(err);
-      }
+      // Filter local demoEvents for today
+      const eventsToday = demoEvents.filter(ev => ev.date === formattedToday);
+      setTodaysEvents(eventsToday);
     };
 
     fetchTodayEvents();
@@ -32,11 +30,22 @@ const Sidebar = () => {
 
   return (
     <aside className="w-72 p-10 border-r border-gray-300">
-      <div className="left-date">
-        <div className="big-num">{new Date().getDate()}</div>
+      {/* Logo */}
+      <div className="mb-8 flex justify-center">
+        <img
+          src="/images/sriyog-logo.svg" // 🔹 Replace with your logo URL
+          alt="Logo"
+          className="h-12 object-contain"
+        />
+      </div>
+
+      {/* Date */}
+      <div className="left-date flex flex-col items-center mt-6">
+        <div className="big-num text-5xl font-bold">{new Date().getDate()}</div>
         <div className="weekday text-2xl mt-2">{weekday}</div>
       </div>
 
+      {/* Calendar categories */}
       <div className="mt-10">
         <h4 className="font-semibold">All Calendar</h4>
         <ul className="mt-4 space-y-3">
@@ -49,11 +58,12 @@ const Sidebar = () => {
         </ul>
       </div>
 
+      {/* Today's events */}
       <div className="mt-8 border-t pt-6">
         <h5 className="text-sm text-gray-500">Today's Attraction</h5>
         {todaysEvents.length > 0 ? (
           todaysEvents.map(event => (
-            <div key={event._id} className="mt-4 p-4 border rounded bg-white">
+            <div key={event.id} className="mt-4 p-4 border rounded bg-white">
               <div className="text-xs text-gray-400">{event.date}</div>
               <div className="mt-3 font-medium">{event.title}</div>
             </div>
