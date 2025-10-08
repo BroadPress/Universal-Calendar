@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+{/* custom: left large date */}
+.left-date {
+  font-family: 'Montserrat', sans-serif;
+}
+.left-date .big-num {
+  font-size: 9rem; /* adjust to match screenshot */
+  line-height: 0.9;
+  color: #7b1515;
+  font-weight: 700;
+}
+.left-date .weekday {
+  color: #7b1515;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+.app-container {
+  height: 100vh;
+}
+.calendar-modal {
+  width: 770px;
+  max-width: calc(80vw);
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 6px 0 rgba(0,0,0,0.06), 0 6px 18px rgba(0,0,0,0.12);
+  border: 1px solid #dedede;
+}
+.modal-overlay {
+  background: rgba(0,0,0,0.25);
+}
