@@ -1,33 +1,46 @@
 import { useState, useEffect } from 'react';
 import dayjs from 'dayjs';
+import axios from 'axios';
 import DayCell from './DayCell';
 import DayModal from './DayModal';
-import { demoEvents } from '../data/demoEvents'; // ✅ Import demo data
 
 export default function CalendarGrid() {
   const [month, setMonth] = useState(dayjs().format('YYYY-MM'));
   const [events, setEvents] = useState([]);
   const [selectedDay, setSelectedDay] = useState(null);
+  const [selectedEvent, setSelectedEvent] = useState(null); // For individual event details
 
   const currentDate = dayjs(month + '-01');
   const currentYear = currentDate.year();
   const currentMonth = currentDate.month(); // 0–11
 
+  // Fetch events from backend whenever month changes
   useEffect(() => {
-    // Instead of fetching from API, we’ll just filter demo events for the current month
-    const filtered = demoEvents.filter(ev => dayjs(ev.date).format('YYYY-MM') === month);
-    setEvents(filtered);
-  }, [month]);
-
+  const fetchEvents = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/api/events', {
+        params: {
+          year: currentYear,
+          month: currentDate.format('MMMM'), // "October"
+        },
+      });
+      console.log("Fetched events from backend:", response.data);
+      setEvents(response.data);
+    } catch (error) {
+      console.error('Failed to fetch events:', error);
+    }
+  };
+  fetchEvents();
+}, [month]);
   const handleMonthChange = (e) => {
-    const newMonth = e.target.value; // 0–11
-    const newDate = dayjs().year(currentYear).month(Number(newMonth)).format('YYYY-MM');
+    const newMonth = Number(e.target.value);
+    const newDate = dayjs().year(currentYear).month(newMonth).format('YYYY-MM');
     setMonth(newDate);
   };
 
   const handleYearChange = (e) => {
-    const newYear = e.target.value;
-    const newDate = dayjs().year(Number(newYear)).month(currentMonth).format('YYYY-MM');
+    const newYear = Number(e.target.value);
+    const newDate = dayjs().year(newYear).month(currentMonth).format('YYYY-MM');
     setMonth(newDate);
   };
 
@@ -48,16 +61,25 @@ export default function CalendarGrid() {
   }
   while (gridCells.length % 7 !== 0) gridCells.push(null);
 
-  const eventsByDate = events.reduce((acc, ev) => {
-    (acc[ev.date] ||= []).push(ev);
-    return acc;
-  }, {});
+  // Group events by date
+ const eventsByDate = events.reduce((acc, ev) => {
+  // Convert month name to month number (0–11)
+  const monthIndex = new Date(`${ev.date.month} 1`).getMonth() + 1;
+  const key = `${ev.date.year}-${String(monthIndex).padStart(2,'0')}-${String(ev.date.day).padStart(2,'0')}`;
+  (acc[key] ||= []).push(ev);
+  return acc;
+}, {});
 
   const months = [
     'January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'
   ];
   const years = [2025, 2026];
+
+  // Handle clicking an event or "view more"
+  const handleEventClick = (event) => {
+    setSelectedEvent(event); // Open event modal for individual event
+  };
 
   return (
     <div className="flex-1 p-12 overflow-y-auto">
@@ -94,7 +116,6 @@ export default function CalendarGrid() {
 
         {/* Today Button */}
         <div className="flex items-center gap-3">
-          {/* Left arrow: previous month */}
           <button
             onClick={() => setMonth(dayjs(month).subtract(1, 'month').format('YYYY-MM'))}
             className="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300"
@@ -102,7 +123,6 @@ export default function CalendarGrid() {
             &lt;
           </button>
 
-          {/* Today button */}
           <button
             onClick={handleToday}
             className="px-3 py-1 bg-gray-100 rounded hover:bg-gray-200 text-sm text-gray-600 font-medium transition-colors"
@@ -110,7 +130,6 @@ export default function CalendarGrid() {
             Today
           </button>
 
-          {/* Right arrow: next month */}
           <button
             onClick={() => setMonth(dayjs(month).add(1, 'month').format('YYYY-MM'))}
             className="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300"
@@ -131,20 +150,28 @@ export default function CalendarGrid() {
       <div className="grid grid-cols-7 gap-6 mt-4">
         {gridCells.map((cell, idx) => (
           <DayCell
-            key={idx}
-            cell={cell}
-            events={cell ? eventsByDate[cell.date] || [] : []}
-            onOpen={() => setSelectedDay(cell && cell.date)}
-          />
+  key={idx}
+  cell={cell}
+  events={cell ? eventsByDate[cell.date] || [] : []}
+  onOpenEvent={handleEventClick}
+/>
         ))}
       </div>
 
-      {/* Day modal */}
-      {selectedDay && (
+      {/* Day modal (show all events for a day) */}
+      {selectedDay && !selectedEvent && (
         <DayModal
           date={selectedDay}
           onClose={() => setSelectedDay(null)}
           events={eventsByDate[selectedDay] || []}
+        />
+      )}
+
+      {/* Event modal (show individual event details) */}
+      {selectedEvent && (
+        <DayModal
+          event={selectedEvent}
+          onClose={() => setSelectedEvent(null)}
         />
       )}
     </div>

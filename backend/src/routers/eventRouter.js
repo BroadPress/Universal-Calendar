@@ -1,10 +1,8 @@
-const express = require('express');
+const express = require("express");
+const { getEventsByMonth } = require("../controllers/eventController");
 const eventRouter = express.Router();
-const eventController = require('../controllers/eventController');
 
-// Routes
-eventRouter.get('/', eventController.getAllEvents);
-eventRouter.get('/day/:date', eventController.getEventsByDay);
-eventRouter.post('/', eventController.createEvent);
+// GET /api/events?year=YYYY&month=MM
+eventRouter.get("/", getEventsByMonth);
 
 module.exports = eventRouter;

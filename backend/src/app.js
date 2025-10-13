@@ -15,8 +15,8 @@ app.use(express.json());
 app.use(customCors);
 app.use('/uploads', express.static(path.join(__dirname, 'public', 'uploads')));
 
-app.use('/api/events', eventRouter);
-app.use('/api/seed', seedRouter);
+app.use("/api/events", eventRouter); // http://localhost:5000/api/events/
+app.use("/api/seed", seedRouter);  // POST http://localhost:5000/api/seed/events
 app.use('/api/banners', bannerRouter);
 
 

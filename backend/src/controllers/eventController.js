@@ -1,38 +1,28 @@
-const Event = require('../models/eventModel');
+const Event = require("../models/eventModel");
 
-// Get all events, optionally filtered by month
-const getAllEvents = async (req, res) => {
-  const { month } = req.query;
+// Fetch events for a specific month and year
+const getEventsByMonth = async (req, res) => {
   try {
-    const events = month 
-      ? await Event.find({ date: new RegExp('^' + month) }).sort('date') 
-      : await Event.find().sort('date');
-    res.json(events);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
+    const { year, month } = req.query;
+
+    if (!year || !month) {
+      return res.status(400).json({ message: "Year and month are required" });
+    }
+
+    console.log("Fetching events for:", year, month);
+
+    // Find events matching the month and year
+    const events = await Event.find({
+      "date.year": Number(year),
+      "date.month": month
+    }).lean();
+
+    console.log("Events found:", events.length);
+    res.status(200).json(events);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Failed to fetch events", error });
   }
 };
 
-// Get events for a specific day
-const getEventsByDay = async (req, res) => {
-  const date = req.params.date;
-  try {
-    const events = await Event.find({ date }).sort('startTime');
-    res.json(events);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-};
-
-// Create a new event
-const createEvent = async (req, res) => {
-  try {
-    const ev = new Event(req.body);
-    await ev.save();
-    res.status(201).json(ev);
-  } catch (err) {
-    res.status(400).json({ message: err.message });
-  }
-};
-
-module.exports = {getAllEvents, getEventsByDay, createEvent };
+module.exports = { getEventsByMonth };

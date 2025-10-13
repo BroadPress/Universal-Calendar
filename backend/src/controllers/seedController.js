@@ -1,25 +1,16 @@
-// backend/src/controllers/seedController.js
-
 const Event = require("../models/eventModel");
-const eventsData = require("../seeds/eventsData");
+const demoEvents = require("../seeds/eventsData");
 
 
 const seedEvents = async (req, res) => {
   try {
-    // Delete all existing events
     await Event.deleteMany({});
-    
-    // Insert seed events
-    const createdEvents = await Event.insertMany(eventsData);
-
-    res.status(201).json({
-      message: 'Events seeded successfully!',
-      count: createdEvents.length,
-      events: createdEvents
-    });
-  } catch (err) {
-    res.status(500).json({ message: err.message });
+    await Event.insertMany(demoEvents);
+    res.status(200).json({ message: "✅ Events seeded successfully!" });
+  } catch (error) {
+    console.error("❌ Error seeding events:", error);
+    res.status(500).json({ message: "Error seeding events", error });
   }
 };
 
-module.exports = { seedEvents };
+module.exports = seedEvents;
