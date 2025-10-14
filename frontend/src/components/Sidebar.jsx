@@ -1,35 +1,33 @@
+// frontend/src/components/Sidebar.jsx
 import { useState, useEffect } from "react";
 import dayjs from "dayjs";
 import axios from "axios";
 
-const Sidebar = () => {
+const Sidebar = ({ selectedTypes, setSelectedTypes }) => {
   const [weekday, setWeekday] = useState('');
   const [todaysEvents, setTodaysEvents] = useState([]);
 
   const calendarCategories = [
-    'Holidays','Festivals','International Days','National Days',
-    'Birthdays','Anniversaries','Events','Others'
+    'Holidays', 'Festivals', 'International Days', 'National Days',
+    'Birthdays', 'Anniversaries', 'Events', 'Others'
   ];
 
   useEffect(() => {
     const fetchTodayEvents = async () => {
       const today = dayjs();
-      const formattedToday = today.format('YYYY-MM-DD'); // "YYYY-MM-DD"
-      const dayName = today.format('dddd').toUpperCase();
-      setWeekday(dayName);
+      const formattedToday = today.format('YYYY-MM-DD');
+      setWeekday(today.format('dddd').toUpperCase());
 
       try {
-        // Fetch all events for the current month
         const response = await axios.get('http://localhost:5000/api/events', {
           params: {
             year: today.year(),
-            month: today.format('MMMM'), // Month name e.g. "October"
+            month: today.format('MMMM')
           },
         });
 
         const events = response.data;
 
-        // Map events to string date for comparison
         const todays = events.filter(ev => {
           const evMonthIndex = new Date(`${ev.date.month} 1`).getMonth() + 1;
           const evDateStr = `${ev.date.year}-${String(evMonthIndex).padStart(2,'0')}-${String(ev.date.day).padStart(2,'0')}`;
@@ -44,41 +42,46 @@ const Sidebar = () => {
     };
 
     fetchTodayEvents();
-    const interval = setInterval(fetchTodayEvents, 60 * 1000); // refresh every minute
+    const interval = setInterval(fetchTodayEvents, 60 * 1000);
     return () => clearInterval(interval);
   }, []);
 
+  // ✅ Handle checkbox toggle
+  const handleToggle = (label) => {
+    setSelectedTypes(prev =>
+      prev.includes(label)
+        ? prev.filter(t => t !== label)
+        : [...prev, label]
+    );
+  };
+
   return (
     <aside className="w-72 p-10 border-r border-gray-300">
-      {/* Logo */}
       <div className="mb-8 flex justify-center">
-        <img
-          src="/images/sriyog-logo.svg"
-          alt="Logo"
-          className="h-12 object-contain"
-        />
+        <img src="/images/sriyog-logo.svg" alt="Logo" className="h-12 object-contain" />
       </div>
 
-      {/* Date */}
       <div className="left-date flex flex-col items-center mt-6">
         <div className="big-num text-5xl font-bold">{dayjs().date()}</div>
         <div className="weekday text-2xl mt-2">{weekday}</div>
       </div>
 
-      {/* Calendar categories */}
       <div className="mt-10">
         <h4 className="font-semibold">All Calendar</h4>
         <ul className="mt-4 space-y-3">
-          {calendarCategories.map((x) =>
+          {calendarCategories.map((x) => (
             <li key={x} className="flex items-center gap-3">
-              <input type="checkbox" />
+              <input
+                type="checkbox"
+                checked={selectedTypes.includes(x)}
+                onChange={() => handleToggle(x)}
+              />
               <span className="text-sm text-gray-700">{x}</span>
             </li>
-          )}
+          ))}
         </ul>
       </div>
 
-      {/* Today's events */}
       <div className="mt-8 border-t pt-6">
         <h5 className="text-sm text-gray-500">Today's Attraction</h5>
         {todaysEvents.length > 0 ? (

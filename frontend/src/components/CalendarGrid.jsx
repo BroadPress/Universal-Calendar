@@ -1,3 +1,4 @@
+// frontend/src/components/CalendarGrid.jsx
 import { useState, useEffect, Fragment } from 'react';
 import dayjs from 'dayjs';
 import axios from 'axios';
@@ -5,7 +6,7 @@ import { Listbox, Transition } from '@headlessui/react';
 import DayCell from './DayCell';
 import DayModal from './DayModal';
 
-export default function CalendarGrid() {
+export default function CalendarGrid({ selectedTypes }) {
   const [month, setMonth] = useState(dayjs().format('YYYY-MM'));
   const [events, setEvents] = useState([]);
   const [selectedDay, setSelectedDay] = useState(null);
@@ -24,32 +25,41 @@ export default function CalendarGrid() {
   ];
   const years = [2025, 2026];
 
-  // ✅ Fetch events
+  // Mapping sidebar labels to backend eventType
+  const typeMap = {
+    Holidays: "Holiday",
+    Festivals: "Nepali Festivals",
+    "International Days": "International Days",
+    "National Days": "National Days",
+    Birthdays: "Birthday",
+    Anniversaries: "Anniversaries",
+    Events: null,
+    Others: null
+  };
+
+  // Fetch events and apply filters
   useEffect(() => {
     const fetchEvents = async () => {
       try {
         const response = await axios.get('http://localhost:5000/api/events', {
           params: { year: currentYear, month: currentDate.format('MMMM') },
         });
-        setEvents(response.data);
+
+        const filteredEvents = selectedTypes.length > 0
+          ? response.data.filter(ev =>
+              selectedTypes.some(sel => typeMap[sel] === ev.eventType)
+            )
+          : response.data;
+
+        setEvents(filteredEvents);
       } catch (error) {
         console.error('Failed to fetch events:', error);
       }
     };
     fetchEvents();
-  }, [month]);
+  }, [month, selectedTypes]);
 
-  // ✅ Handle today button
-  const handleToday = () => {
-    const today = dayjs();
-    if (today.year() >= MIN_YEAR && today.year() <= MAX_YEAR) {
-      setMonth(today.format('YYYY-MM'));
-    } else {
-      setMonth(`${MIN_YEAR}-01`);
-    }
-  };
-
-  // ✅ Generate grid
+  // Calendar grid
   const monthStart = dayjs(month + '-01');
   const startWeekDay = monthStart.startOf('month').day();
   const daysInMonth = monthStart.daysInMonth();
@@ -62,37 +72,43 @@ export default function CalendarGrid() {
   }
   while (gridCells.length % 7 !== 0) gridCells.push(null);
 
-  // ✅ Group events by date
+  // Group events by date
   const eventsByDate = events.reduce((acc, ev) => {
     const monthIndex = new Date(`${ev.date.month} 1`).getMonth() + 1;
-    const key = `${ev.date.year}-${String(monthIndex).padStart(2, '0')}-${String(ev.date.day).padStart(2, '0')}`;
+    const key = `${ev.date.year}-${String(monthIndex).padStart(2,'0')}-${String(ev.date.day).padStart(2,'0')}`;
     (acc[key] ||= []).push(ev);
     return acc;
   }, {});
 
-  // ✅ Handle event click (single event)
+  // Handlers
   const handleEventClick = (event) => {
     setSelectedEvent(event);
     setSelectedDay(null);
   };
 
-  // ✅ Handle “view more” or empty day click
   const handleSelectDay = (date) => {
     setSelectedDay(date);
     setSelectedEvent(null);
   };
 
-  // ✅ Close modal
   const handleCloseModal = () => {
     setSelectedDay(null);
     setSelectedEvent(null);
+  };
+
+  const handleToday = () => {
+    const today = dayjs();
+    if (today.year() >= MIN_YEAR && today.year() <= MAX_YEAR) {
+      setMonth(today.format('YYYY-MM'));
+    } else {
+      setMonth(`${MIN_YEAR}-01`);
+    }
   };
 
   return (
     <div className="flex-1 p-12 overflow-y-auto">
       {/* Header */}
       <header className="flex items-center justify-between mb-10">
-        {/* Month & Year Dropdowns */}
         <div className="flex items-center gap-3">
           {/* Month Dropdown */}
           <div className="relative w-36">
@@ -155,7 +171,7 @@ export default function CalendarGrid() {
           </div>
         </div>
 
-        {/* Navigation Buttons */}
+        {/* Navigation */}
         <div className="flex items-center gap-3">
           <button
             onClick={() => setMonth(dayjs(month).subtract(1, 'month').format('YYYY-MM'))}
@@ -200,7 +216,7 @@ export default function CalendarGrid() {
         ))}
       </div>
 
-      {/* ✅ Day modal logic */}
+      {/* Modals */}
       {selectedEvent && (
         <DayModal
           event={selectedEvent}
@@ -212,7 +228,9 @@ export default function CalendarGrid() {
         <DayModal
           date={selectedDay}
           onClose={handleCloseModal}
-          events={eventsByDate[selectedDay] || []}
+          events={eventsByDate[selectedDay]?.filter(ev =>
+            selectedTypes.length === 0 || selectedTypes.some(sel => typeMap[sel] === ev.eventType)
+          ) || []}
         />
       )}
     </div>
