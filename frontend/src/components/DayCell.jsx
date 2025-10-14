@@ -2,9 +2,9 @@ import dayjs from 'dayjs';
 
 const typeColors = {
   Holiday: '#f87171',             // backend "Holiday" - Red
-  "Nepali Festivals": '#93c5fd' ,  // backend "Nepali Festivals" - Green
-  "International Days": '#34d399',// backend "International Days" - Light Blue
-  "National Days": '#60a5fa',     // backend "National Days" - Blue
+  "Nepali Festivals": '#93c5fd',  // backend "Nepali Festivals" - Blue
+  "International Days": '#34d399',// backend "International Days" - Green
+  "National Days": '#60a5fa',     // backend "National Days" - Light Blue
   Birthday: '#fbbf24',            // backend "Birthday" - Yellow
   Anniversaries: '#a78bfa',       // backend "Anniversaries" - Purple
   default: '#d1d5db'              // fallback color - Gray
@@ -31,7 +31,7 @@ const DayCell = ({ cell, events, onOpenEvent }) => {
         {events.slice(0, 3).map((ev) => (
           <div
             key={ev._id || ev.id}
-            className="text-xs px-2 py-1 rounded text-white text-center cursor-pointer"
+            className="text-xs px-2 py-1 rounded text-gray-900 font-medium text-center cursor-pointer"
             style={{ backgroundColor: typeColors[ev.eventType] || typeColors.default }}
             onClick={() => onOpenEvent(ev)}
           >
@@ -41,7 +41,7 @@ const DayCell = ({ cell, events, onOpenEvent }) => {
 
         {events.length > 3 && (
           <div
-            className="text-xs text-blue-500 text-center cursor-pointer"
+            className="text-xs text-blue-600 font-medium text-center cursor-pointer"
             onClick={() => onOpenEvent({ showAll: true, date: cell.date })}
           >
             view more
