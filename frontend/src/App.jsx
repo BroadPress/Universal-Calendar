@@ -1,6 +1,5 @@
-
-import Sidebar from './components/Sidebar'
-import CalendarGrid from './components/CalendarGrid'
+import CalendarGrid from "./components/CalendarGrid";
+import Sidebar from "./components/Sidebar";
 
 export default function App() {
   return (
