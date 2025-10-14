@@ -24,6 +24,7 @@ export default function CalendarGrid() {
   ];
   const years = [2025, 2026];
 
+  // ✅ Fetch events
   useEffect(() => {
     const fetchEvents = async () => {
       try {
@@ -38,6 +39,7 @@ export default function CalendarGrid() {
     fetchEvents();
   }, [month]);
 
+  // ✅ Handle today button
   const handleToday = () => {
     const today = dayjs();
     if (today.year() >= MIN_YEAR && today.year() <= MAX_YEAR) {
@@ -47,6 +49,7 @@ export default function CalendarGrid() {
     }
   };
 
+  // ✅ Generate grid
   const monthStart = dayjs(month + '-01');
   const startWeekDay = monthStart.startOf('month').day();
   const daysInMonth = monthStart.daysInMonth();
@@ -59,6 +62,7 @@ export default function CalendarGrid() {
   }
   while (gridCells.length % 7 !== 0) gridCells.push(null);
 
+  // ✅ Group events by date
   const eventsByDate = events.reduce((acc, ev) => {
     const monthIndex = new Date(`${ev.date.month} 1`).getMonth() + 1;
     const key = `${ev.date.year}-${String(monthIndex).padStart(2, '0')}-${String(ev.date.day).padStart(2, '0')}`;
@@ -66,13 +70,29 @@ export default function CalendarGrid() {
     return acc;
   }, {});
 
-  const handleEventClick = (event) => setSelectedEvent(event);
+  // ✅ Handle event click (single event)
+  const handleEventClick = (event) => {
+    setSelectedEvent(event);
+    setSelectedDay(null);
+  };
+
+  // ✅ Handle “view more” or empty day click
+  const handleSelectDay = (date) => {
+    setSelectedDay(date);
+    setSelectedEvent(null);
+  };
+
+  // ✅ Close modal
+  const handleCloseModal = () => {
+    setSelectedDay(null);
+    setSelectedEvent(null);
+  };
 
   return (
     <div className="flex-1 p-12 overflow-y-auto">
       {/* Header */}
       <header className="flex items-center justify-between mb-10">
-        {/* Left: Month & Year Dropdowns */}
+        {/* Month & Year Dropdowns */}
         <div className="flex items-center gap-3">
           {/* Month Dropdown */}
           <div className="relative w-36">
@@ -135,7 +155,7 @@ export default function CalendarGrid() {
           </div>
         </div>
 
-        {/* Right: Navigation Buttons */}
+        {/* Navigation Buttons */}
         <div className="flex items-center gap-3">
           <button
             onClick={() => setMonth(dayjs(month).subtract(1, 'month').format('YYYY-MM'))}
@@ -167,7 +187,7 @@ export default function CalendarGrid() {
         ))}
       </div>
 
-      {/* Days */}
+      {/* Days grid */}
       <div className="grid grid-cols-7 gap-6 mt-4">
         {gridCells.map((cell, idx) => (
           <DayCell
@@ -175,23 +195,24 @@ export default function CalendarGrid() {
             cell={cell}
             events={cell ? eventsByDate[cell.date] || [] : []}
             onOpenEvent={handleEventClick}
-            onSelectDay={(date) => setSelectedDay(date)}
+            onSelectDay={handleSelectDay}
           />
         ))}
       </div>
 
-      {/* Day modal */}
-      {selectedDay && !selectedEvent && (
-        <DayModal
-          date={selectedDay}
-          onClose={() => setSelectedDay(null)}
-          events={eventsByDate[selectedDay] || []}
-        />
-      )}
+      {/* ✅ Day modal logic */}
       {selectedEvent && (
         <DayModal
           event={selectedEvent}
-          onClose={() => setSelectedEvent(null)}
+          date={selectedEvent.date}
+          onClose={handleCloseModal}
+        />
+      )}
+      {selectedDay && !selectedEvent && (
+        <DayModal
+          date={selectedDay}
+          onClose={handleCloseModal}
+          events={eventsByDate[selectedDay] || []}
         />
       )}
     </div>
