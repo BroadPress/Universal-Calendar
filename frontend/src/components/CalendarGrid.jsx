@@ -25,7 +25,6 @@ export default function CalendarGrid({ selectedTypes }) {
   ];
   const years = [2025, 2026];
 
-  // Mapping sidebar labels to backend eventType
   const typeMap = {
     Holidays: "Holiday",
     Festivals: "Nepali Festivals",
@@ -37,7 +36,6 @@ export default function CalendarGrid({ selectedTypes }) {
     Others: null
   };
 
-  // Fetch events and apply filters
   useEffect(() => {
     const fetchEvents = async () => {
       try {
@@ -59,7 +57,6 @@ export default function CalendarGrid({ selectedTypes }) {
     fetchEvents();
   }, [month, selectedTypes]);
 
-  // Calendar grid
   const monthStart = dayjs(month + '-01');
   const startWeekDay = monthStart.startOf('month').day();
   const daysInMonth = monthStart.daysInMonth();
@@ -72,15 +69,13 @@ export default function CalendarGrid({ selectedTypes }) {
   }
   while (gridCells.length % 7 !== 0) gridCells.push(null);
 
-  // Group events by date
   const eventsByDate = events.reduce((acc, ev) => {
     const monthIndex = new Date(`${ev.date.month} 1`).getMonth() + 1;
-    const key = `${ev.date.year}-${String(monthIndex).padStart(2,'0')}-${String(ev.date.day).padStart(2,'0')}`;
+    const key = `${ev.date.year}-${String(monthIndex).padStart(2, '0')}-${String(ev.date.day).padStart(2, '0')}`;
     (acc[key] ||= []).push(ev);
     return acc;
   }, {});
 
-  // Handlers
   const handleEventClick = (event) => {
     setSelectedEvent(event);
     setSelectedDay(null);
@@ -106,114 +101,119 @@ export default function CalendarGrid({ selectedTypes }) {
   };
 
   return (
-    <div className="flex-1 p-12 overflow-y-auto">
-      {/* Header */}
-      <header className="flex items-center justify-between mb-10">
-        <div className="flex items-center gap-3">
-          {/* Month Dropdown */}
-          <div className="relative w-36">
-            <Listbox value={currentMonth} onChange={(m) => setMonth(dayjs().year(currentYear).month(m).format('YYYY-MM'))}>
-              <Listbox.Button className="relative w-full cursor-pointer bg-white rounded-lg py-2 pl-4 pr-10 text-left shadow-sm">
-                <span className="font-bold text-xl">{months[currentMonth]}</span>
-                <span className="absolute inset-y-0 right-2 flex items-center pointer-events-none text-[#7b1515]">▼</span>
-              </Listbox.Button>
-              <Transition
-                as={Fragment}
-                leave="transition ease-in duration-100"
-                leaveFrom="opacity-100"
-                leaveTo="opacity-0"
-              >
-                <Listbox.Options className="absolute mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none z-10">
-                  {months.map((m, idx) => (
-                    <Listbox.Option
-                      key={idx}
-                      value={idx}
-                      className={({ active }) =>
-                        `cursor-pointer select-none relative py-2 pl-4 pr-4 ${active ? 'bg-red-100 text-red-900' : 'text-gray-900'}`
-                      }
-                    >
-                      {m}
-                    </Listbox.Option>
-                  ))}
-                </Listbox.Options>
-              </Transition>
-            </Listbox>
+    <div className="flex-1 flex flex-col h-full p-6">
+      {/* Sticky Header */}
+      <div className="flex-shrink-0 sticky top-0 bg-white z-20">
+        {/* Header: Month/Year selectors + Navigation */}
+        <header className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-3">
+            {/* Month Dropdown */}
+            <div className="relative w-36">
+              <Listbox value={currentMonth} onChange={(m) => setMonth(dayjs().year(currentYear).month(m).format('YYYY-MM'))}>
+                <Listbox.Button className="relative w-full cursor-pointer bg-white rounded-lg py-2 pl-4 pr-10 text-left shadow-sm">
+                  <span className="font-bold text-xl">{months[currentMonth]}</span>
+                  <span className="absolute inset-y-0 right-2 flex items-center pointer-events-none text-[#7b1515]">▼</span>
+                </Listbox.Button>
+                <Transition
+                  as={Fragment}
+                  leave="transition ease-in duration-100"
+                  leaveFrom="opacity-100"
+                  leaveTo="opacity-0"
+                >
+                  <Listbox.Options className="absolute mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none z-30">
+                    {months.map((m, idx) => (
+                      <Listbox.Option
+                        key={idx}
+                        value={idx}
+                        className={({ active }) =>
+                          `cursor-pointer select-none relative py-2 pl-4 pr-4 ${active ? 'bg-red-100 text-red-900' : 'text-gray-900'}`
+                        }
+                      >
+                        {m}
+                      </Listbox.Option>
+                    ))}
+                  </Listbox.Options>
+                </Transition>
+              </Listbox>
+            </div>
+
+            {/* Year Dropdown */}
+            <div className="relative w-28">
+              <Listbox value={currentYear} onChange={(y) => setMonth(dayjs().year(y).month(currentMonth).format('YYYY-MM'))}>
+                <Listbox.Button className="relative w-full cursor-pointer bg-white rounded-lg py-2 pl-4 pr-10 text-left shadow-sm">
+                  <span className="text-xl">{currentYear}</span>
+                  <span className="absolute inset-y-0 right-2 flex items-center pointer-events-none text-[#7b1515]">▼</span>
+                </Listbox.Button>
+                <Transition
+                  as={Fragment}
+                  leave="transition ease-in duration-100"
+                  leaveFrom="opacity-100"
+                  leaveTo="opacity-0"
+                >
+                  <Listbox.Options className="absolute mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none z-30">
+                    {years.map((y) => (
+                      <Listbox.Option
+                        key={y}
+                        value={y}
+                        className={({ active }) =>
+                          `cursor-pointer select-none relative py-2 pl-4 pr-4 ${active ? 'bg-red-100 text-red-900' : 'text-gray-900'}`
+                        }
+                      >
+                        {y}
+                      </Listbox.Option>
+                    ))}
+                  </Listbox.Options>
+                </Transition>
+              </Listbox>
+            </div>
           </div>
 
-          {/* Year Dropdown */}
-          <div className="relative w-28">
-            <Listbox value={currentYear} onChange={(y) => setMonth(dayjs().year(y).month(currentMonth).format('YYYY-MM'))}>
-              <Listbox.Button className="relative w-full cursor-pointer bg-white rounded-lg py-2 pl-4 pr-10 text-left shadow-sm">
-                <span className="text-xl">{currentYear}</span>
-                <span className="absolute inset-y-0 right-2 flex items-center pointer-events-none text-[#7b1515]">▼</span>
-              </Listbox.Button>
-              <Transition
-                as={Fragment}
-                leave="transition ease-in duration-100"
-                leaveFrom="opacity-100"
-                leaveTo="opacity-0"
-              >
-                <Listbox.Options className="absolute mt-1 w-full bg-white shadow-lg max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none z-10">
-                  {years.map((y) => (
-                    <Listbox.Option
-                      key={y}
-                      value={y}
-                      className={({ active }) =>
-                        `cursor-pointer select-none relative py-2 pl-4 pr-4 ${active ? 'bg-red-100 text-red-900' : 'text-gray-900'}`
-                      }
-                    >
-                      {y}
-                    </Listbox.Option>
-                  ))}
-                </Listbox.Options>
-              </Transition>
-            </Listbox>
+          {/* Navigation */}
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setMonth(dayjs(month).subtract(1, 'month').format('YYYY-MM'))}
+              className={`px-3 py-1 rounded ${dayjs(month).subtract(1, 'month').year() < MIN_YEAR ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-gray-200 hover:bg-gray-300'}`}
+              disabled={dayjs(month).subtract(1, 'month').year() < MIN_YEAR}
+            >
+              &lt;
+            </button>
+            <button
+              onClick={handleToday}
+              className="px-3 py-1 bg-gray-100 rounded hover:bg-gray-200 text-sm text-gray-600 font-medium transition-colors"
+            >
+              Today
+            </button>
+            <button
+              onClick={() => setMonth(dayjs(month).add(1, 'month').format('YYYY-MM'))}
+              className={`px-3 py-1 rounded ${dayjs(month).add(1, 'month').year() > MAX_YEAR ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-gray-200 hover:bg-gray-300'}`}
+              disabled={dayjs(month).add(1, 'month').year() > MAX_YEAR}
+            >
+              &gt;
+            </button>
           </div>
-        </div>
+        </header>
 
-        {/* Navigation */}
-        <div className="flex items-center gap-3">
-          <button
-            onClick={() => setMonth(dayjs(month).subtract(1, 'month').format('YYYY-MM'))}
-            className={`px-3 py-1 rounded ${dayjs(month).subtract(1, 'month').year() < MIN_YEAR ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-gray-200 hover:bg-gray-300'}`}
-            disabled={dayjs(month).subtract(1, 'month').year() < MIN_YEAR}
-          >
-            &lt;
-          </button>
-          <button
-            onClick={handleToday}
-            className="px-3 py-1 bg-gray-100 rounded hover:bg-gray-200 text-sm text-gray-600 font-medium transition-colors"
-          >
-            Today
-          </button>
-          <button
-            onClick={() => setMonth(dayjs(month).add(1, 'month').format('YYYY-MM'))}
-            className={`px-3 py-1 rounded ${dayjs(month).add(1, 'month').year() > MAX_YEAR ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'bg-gray-200 hover:bg-gray-300'}`}
-            disabled={dayjs(month).add(1, 'month').year() > MAX_YEAR}
-          >
-            &gt;
-          </button>
+        {/* Week headers */}
+        <div className="grid grid-cols-7 gap-4 text-sm border-b border-gray-300 bg-white sticky top-[72px] z-10">
+          {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(h => (
+            <div key={h} className="font-semibold text-gray-400">{h}</div>
+          ))}
         </div>
-      </header>
-
-      {/* Week headers */}
-      <div className="grid grid-cols-7 gap-4 text-sm">
-        {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(h => (
-          <div key={h} className="font-semibold text-gray-400">{h}</div>
-        ))}
       </div>
 
-      {/* Days grid */}
-      <div className="grid grid-cols-7 gap-6 mt-4">
-        {gridCells.map((cell, idx) => (
-          <DayCell
-            key={idx}
-            cell={cell}
-            events={cell ? eventsByDate[cell.date] || [] : []}
-            onOpenEvent={handleEventClick}
-            onSelectDay={handleSelectDay}
-          />
-        ))}
+      {/* Scrollable Calendar Grid */}
+      <div className="flex-1 overflow-y-auto mt-4">
+        <div className="grid grid-cols-7 border-t border-l border-gray-300">
+          {gridCells.map((cell, idx) => (
+            <DayCell
+              key={idx}
+              cell={cell}
+              events={cell ? eventsByDate[cell.date] || [] : []}
+              onOpenEvent={handleEventClick}
+              onSelectDay={handleSelectDay}
+            />
+          ))}
+        </div>
       </div>
 
       {/* Modals */}

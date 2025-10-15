@@ -1,39 +1,41 @@
 import dayjs from 'dayjs';
 
 const typeColors = {
-  Holiday: '#f87171',             // backend "Holiday" - Red
-  "Nepali Festivals": '#93c5fd',  // backend "Nepali Festivals" - Blue
-  "International Days": '#34d399',// backend "International Days" - Green
-  "National Days": '#60a5fa',     // backend "National Days" - Light Blue
-  Birthday: '#fbbf24',            // backend "Birthday" - Yellow
-  Anniversaries: '#a78bfa',       // backend "Anniversaries" - Purple
-  default: '#d1d5db'              // fallback color - Gray
+  Holiday: '#f87171',
+  "Nepali Festivals": '#93c5fd',
+  "International Days": '#34d399',
+  "National Days": '#60a5fa',
+  Birthday: '#fbbf24',
+  Anniversaries: '#a78bfa',
+  default: '#d1d5db'
 };
 
 const DayCell = ({ cell, events, onOpenEvent }) => {
-  if (!cell) return <div className="h-28"></div>;
+  if (!cell) return (
+    <div className="aspect-square border-r border-b border-gray-300 bg-gray-50"></div>
+  );
 
-  const isToday = dayjs(cell.date).isSame(dayjs(), 'day'); // check if current date
+  const isToday = dayjs(cell.date).isSame(dayjs(), 'day');
 
   return (
-    <div className="min-h-28 p-3 bg-transparent rounded flex flex-col items-center justify-center">
+    <div
+      className={`aspect-square p-3 flex flex-col items-start justify-start border-r border-b border-gray-300 bg-white hover:bg-gray-50 transition-all duration-150`}
+    >
       {/* Day number */}
-      <div
-        className={`text-xs mb-2 flex items-center justify-center w-6 h-6 rounded-full ${
-          isToday ? 'bg-black text-white' : 'text-gray-400'
-        }`}
-      >
+      <div className={`mb-2 flex items-center justify-center w-7 h-7 rounded-full text-xs font-semibold
+        ${isToday ? 'bg-black text-white shadow-md' : 'text-gray-500'}`}>
         {cell.day}
       </div>
 
       {/* Events */}
-      <div className="space-y-2 w-full">
+      <div className="flex flex-col gap-1 w-full overflow-hidden">
         {events.slice(0, 3).map((ev) => (
           <div
             key={ev._id || ev.id}
-            className="text-xs px-2 py-1 rounded text-gray-900 font-medium text-center cursor-pointer"
+            className="text-xs px-2 py-1 rounded-full text-white font-medium text-center truncate cursor-pointer shadow-sm"
             style={{ backgroundColor: typeColors[ev.eventType] || typeColors.default }}
             onClick={() => onOpenEvent(ev)}
+            title={ev.title}
           >
             {ev.title}
           </div>
@@ -41,10 +43,10 @@ const DayCell = ({ cell, events, onOpenEvent }) => {
 
         {events.length > 3 && (
           <div
-            className="text-xs text-blue-600 font-medium text-center cursor-pointer"
+            className="text-xs text-blue-600 font-medium cursor-pointer truncate"
             onClick={() => onOpenEvent({ showAll: true, date: cell.date })}
           >
-            view more
+            +{events.length - 3} more
           </div>
         )}
       </div>

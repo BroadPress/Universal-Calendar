@@ -56,48 +56,50 @@ const Sidebar = ({ selectedTypes, setSelectedTypes }) => {
   };
 
   return (
-    <aside className="w-72 p-10 border-r border-gray-300">
-      <div className="mb-8 flex justify-center">
-        <img src="/images/sriyog-logo.svg" alt="Logo" className="h-12 object-contain" />
-      </div>
+    <aside className="w-72 p-10 border-r border-gray-300 sticky top-0 h-screen bg-white overflow-y-auto">
+  <div className="mb-8 flex justify-center">
+    <img src="/images/sriyog-logo.svg" alt="Logo" className="h-12 object-contain" />
+  </div>
 
-      <div className="left-date flex flex-col items-center mt-6">
-        <div className="big-num text-5xl font-bold">{dayjs().date()}</div>
-        <div className="weekday text-2xl mt-2">{weekday}</div>
-      </div>
+  <div className="left-date flex flex-col items-center mt-6">
+    <div className="big-num text-5xl font-bold">{dayjs().date()}</div>
+    <div className="weekday text-2xl mt-2">{weekday}</div>
+  </div>
 
-      <div className="mt-10">
-        <h4 className="font-semibold">All Calendar</h4>
-        <ul className="mt-4 space-y-3">
-          {calendarCategories.map((x) => (
-            <li key={x} className="flex items-center gap-3">
-              <input
-                type="checkbox"
-                checked={selectedTypes.includes(x)}
-                onChange={() => handleToggle(x)}
-              />
-              <span className="text-sm text-gray-700">{x}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
+  <div className="mt-10">
+    <h4 className="font-semibold">All Calendar</h4>
+    <ul className="mt-4 space-y-3">
+      {calendarCategories.map((x) => (
+        <li key={x} className="flex items-center gap-3">
+          <input
+            type="checkbox"
+            checked={selectedTypes.includes(x)}
+            onChange={() => handleToggle(x)}
+          />
+          <span className="text-sm text-gray-700">{x}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
 
-      <div className="mt-8 border-t pt-6">
-        <h5 className="text-sm text-gray-500">Today's Attraction</h5>
-        {todaysEvents.length > 0 ? (
-          todaysEvents.map(event => (
-            <div key={event._id} className="mt-4 p-4 border rounded bg-white">
-              <div className="text-xs text-gray-400">{dayjs(`${event.date.year}-${event.date.month}-${event.date.day}`).format('YYYY-MM-DD')}</div>
-              <div className="mt-3 font-medium">{event.title}</div>
-            </div>
-          ))
-        ) : (
-          <div className="mt-4 p-4 border rounded bg-white text-gray-400">
-            No events today
+  <div className="mt-8 border-t pt-6">
+    <h5 className="text-sm text-gray-500">Today's Attraction</h5>
+    {todaysEvents.length > 0 ? (
+      todaysEvents.map(event => (
+        <div key={event._id} className="mt-4 p-4 border rounded bg-white">
+          <div className="text-xs text-gray-400">
+            {dayjs(`${event.date.year}-${event.date.month}-${event.date.day}`).format('YYYY-MM-DD')}
           </div>
-        )}
+          <div className="mt-3 font-medium">{event.title}</div>
+        </div>
+      ))
+    ) : (
+      <div className="mt-4 p-4 border rounded bg-white text-gray-400">
+        No events today
       </div>
-    </aside>
+    )}
+  </div>
+</aside>
   );
 };
 
