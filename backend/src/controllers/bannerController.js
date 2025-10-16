@@ -1,32 +1,37 @@
-// backend/src/controllers/bannerController.js
-const Banner = require('../models/bannerModel');
 const path = require('path');
+const fs = require('fs');
+const Banner = require('../models/bannerModel');
 
 const createBanner = async (req, res) => {
   try {
-    // multer places file on req.file
-    if (!req.file) return res.status(400).json({ message: 'No file uploaded' });
+    if (!req.files || req.files.length === 0)
+      return res.status(400).json({ message: 'No files uploaded' });
 
     const { dateFor, viewType } = req.body;
-    const banner = new Banner({
-      filename: req.file.filename,
-      originalName: req.file.originalname,
-      size: req.file.size,
-      mimeType: req.file.mimetype,
+
+    const banners = req.files.map(f => ({
+      filename: f.filename,
+      originalName: f.originalname,
+      size: f.size,
+      mimeType: f.mimetype,
       dateFor: dateFor || null,
       viewType: viewType || 'event'
-    });
+    }));
 
-    await banner.save();
+    const savedBanners = await Banner.insertMany(banners);
 
-    // return saved banner with publicly accessible url
-    const publicUrl = `${req.protocol}://${req.get('host')}/uploads/${banner.filename}`;
-    res.status(201).json({ banner, publicUrl });
+    const data = savedBanners.map(b => ({
+      ...b.toObject(),
+      url: `${req.protocol}://${req.get('host')}/uploads/${b.filename}`
+    }));
+
+    res.status(201).json(data);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: err.message });
   }
 };
+
 
 const getBannersByDay = async (req, res) => {
   try {
@@ -62,8 +67,15 @@ const deleteBanner = async (req, res) => {
     const banner = await Banner.findByIdAndDelete(id);
     if (!banner) return res.status(404).json({ message: 'Banner not found' });
 
+    // delete the actual file from the server
+    const filePath = path.join(__dirname, '..', 'public', 'uploads', banner.filename);
+    fs.unlink(filePath, (err) => {
+      if (err) console.error('Failed to delete file:', err);
+    });
+
     res.json({ message: 'Banner deleted' });
   } catch (err) {
+    console.error(err);
     res.status(500).json({ message: err.message });
   }
 };
