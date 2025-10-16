@@ -1,18 +1,21 @@
-// backend/src/routers/banners.js
 const express = require('express');
 const bannerRouter = express.Router();
-const upload = require('../config/multer'); // multer instance
-const bannerController = require('../controllers/bannerController'); 
+const upload = require('../config/multer');
+const bannerController = require('../controllers/bannerController');
 
-// upload a banner (multipart/form-data)
+// Upload banners
 bannerRouter.post('/', upload.array('file'), bannerController.createBanner);
-// get banners for a date
+
+// Get banners for a specific event
+bannerRouter.get('/event/:eventId', bannerController.getBannersByEvent);
+
+// Optional: get banners by day
 bannerRouter.get('/day/:date', bannerController.getBannersByDay);
 
-// get all
+// Get all banners
 bannerRouter.get('/', bannerController.getAllBanners);
 
-// delete a banner
+// Delete a banner
 bannerRouter.delete('/:id', bannerController.deleteBanner);
 
 module.exports = bannerRouter;

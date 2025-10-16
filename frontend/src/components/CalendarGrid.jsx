@@ -69,10 +69,15 @@ export default function CalendarGrid({ selectedTypes }) {
     return acc;
   }, {});
 
-  const handleEventClick = (event) => {
-    setSelectedEvent(event);
+const handleEventClick = (event) => {
+  if (event.showAll) {
+    setSelectedDay(event.date);
+    setSelectedEvent(null);
+  } else {
+    setSelectedEvent(event); // ✅ full event object with description
     setSelectedDay(null);
-  };
+  }
+};
   const handleSelectDay = (date) => {
     setSelectedDay(date);
     setSelectedEvent(null);

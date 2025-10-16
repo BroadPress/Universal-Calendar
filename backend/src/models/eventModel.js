@@ -23,6 +23,7 @@ const eventSchema = new Schema(
       month: { type: String, required: true },
       year: { type: Number, required: true },
     },
+    description: { type: String, default: "" } // <-- new field
   },
   { timestamps: true }
 );

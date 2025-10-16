@@ -3,6 +3,7 @@ const demoEvents = [
   // 🌟 JANUARY
   {
     title: "New Year's Day",
+    description: "Global celebration marking the first day of the year. People worldwide gather to reflect on the past year and make resolutions for personal growth and positive change.",
     organisation: "Global",
     industry: "General Celebration",
     eventType: "International Days",
@@ -11,6 +12,7 @@ const demoEvents = [
   },
   {
     title: "World Introvert Day",
+    description: "A day dedicated to recognition and appreciation of introverted personalities and their unique strengths. It celebrates the quieter, reflective nature of introverts and promotes understanding of different personality types.",
     organisation: "Global",
     industry: "Psychology & Awareness",
     eventType: "International Days",
@@ -19,6 +21,7 @@ const demoEvents = [
   },
   {
     title: "Prithivi Jayanti (Unity Day)",
+    description: "Commemorates the birth anniversary of King Prithivi Narayan Shah, the founder of modern Nepal. This day celebrates his role in unifying various small kingdoms into a single nation and is marked by official ceremonies and cultural programs.",
     organisation: "Government of Nepal",
     industry: "National Days",
     eventType: "National Days",
@@ -27,6 +30,7 @@ const demoEvents = [
   },
   {
     title: "National Youth Day (Nepal)",
+    description: "Celebrates the contributions and potential of Nepal's youth in nation building. The day features programs promoting youth empowerment, skill development, and active participation in social and political life.",
     organisation: "Government of Nepal",
     industry: "Youth & Development",
     eventType: "National Days",
@@ -35,6 +39,7 @@ const demoEvents = [
   },
   {
     title: "Maghe Sankranti",
+    description: "Hindu festival marking the sun's transition into Capricorn and the end of winter solstice. Families gather to feast on traditional foods like ghee, yam, sweet potatoes, and sesame seeds, believing these bring good health and prosperity.",
     organisation: "Nepal",
     industry: "Cultural/Festival",
     eventType: "Nepali Festivals",
@@ -43,6 +48,7 @@ const demoEvents = [
   },
   {
     title: "Basanta Panchami / Saraswati Puja",
+    description: "Worship of Goddess Saraswati, the deity of knowledge, wisdom, music, and arts. Students and scholars seek blessings for academic success, and the day marks the arrival of spring with yellow flowers and clothing symbolizing the season.",
     organisation: "Nepal",
     industry: "Education & Religion",
     eventType: "Nepali Festivals",
@@ -51,6 +57,7 @@ const demoEvents = [
   },
   {
     title: "International Day of Education",
+    description: "Celebrates education's crucial role in achieving peace and sustainable development. The day advocates for inclusive and equitable quality education for all, highlighting education as a fundamental human right.",
     organisation: "UN",
     industry: "Education",
     eventType: "International Days",
@@ -59,6 +66,7 @@ const demoEvents = [
   },
   {
     title: "International Day for the Total Elimination of Nuclear Weapons",
+    description: "Raises awareness about the urgent need for nuclear disarmament and global security. The day promotes international commitment to achieving a world free from nuclear weapons through dialogue and cooperation.",
     organisation: "UN",
     industry: "Peace and Disarmament Sector",
     eventType: "International Days",
@@ -67,6 +75,7 @@ const demoEvents = [
   },
   {
     title: "International Day of Commemoration in Memory of the Victims of the Holocaust",
+    description: "Honors the six million Jewish victims and millions of others who perished in the Holocaust. The day promotes education about the Holocaust to help prevent future acts of genocide and crimes against humanity.",
     organisation: "UN",
     industry: "Education, Human Rights, Peace & Cultural Heritage",
     eventType: "International Days",
@@ -75,6 +84,7 @@ const demoEvents = [
   },
   {
     title: "Martyrs' Day / Sahid Diwas",
+    description: "Honors the brave martyrs who sacrificed their lives for Nepal's democracy, freedom, and national sovereignty. The day includes memorial services, wreaths laying ceremonies, and programs recognizing their contributions to the nation.",
     organisation: "Government of Nepal",
     industry: "National Days",
     eventType: "National Days",
@@ -83,6 +93,7 @@ const demoEvents = [
   },
   {
     title: "Sonam Lhosar (Tamang New Year)",
+    description: "The Tamang community's New Year celebration featuring traditional dances, music, and feasting. Families wear traditional attire, exchange gifts, and perform cultural rituals to welcome prosperity and good fortune for the year ahead.",
     organisation: "Nepal",
     industry: "Cultural/Festival",
     eventType: "Nepali Festivals",
@@ -93,6 +104,7 @@ const demoEvents = [
   // 💕 FEBRUARY
   {
     title: "National Democracy Day (Nepal)",
+    description: "Commemorates the end of the autocratic Rana regime in 1951 and the beginning of democracy in Nepal. This historic day marks the restoration of the Shah monarchy and the people's struggle for democratic rights and freedoms.",
     organisation: "Government of Nepal",
     industry: "National Holiday",
     eventType: "National Days",
@@ -101,6 +113,7 @@ const demoEvents = [
   },
   {
     title: "World Cancer Day",
+    description: "A global initiative to raise awareness about cancer prevention, detection, and treatment. The day unites people worldwide to take action against the disease and support those affected by cancer.",
     organisation: "UN",
     industry: "Healthcare",
     eventType: "International Days",
@@ -109,6 +122,7 @@ const demoEvents = [
   },
   {
     title: "World Pulses Day",
+    description: "Recognizes the nutritional benefits of pulses and their contribution to sustainable food systems. The day highlights how legumes like lentils, beans, and peas support soil health and food security worldwide.",
     organisation: "UN",
     industry: "Agriculture and Food Security",
     eventType: "International Days",
@@ -117,6 +131,7 @@ const demoEvents = [
   },
   {
     title: "International Day of Women and Girls in Science",
+    description: "Promotes equal access and participation of women and girls in science, technology, engineering, and mathematics. The day addresses gender disparities in STEM fields and celebrates female scientists' achievements.",
     organisation: "UN",
     industry: "STEM and Gender Equality",
     eventType: "International Days",
@@ -125,6 +140,7 @@ const demoEvents = [
   },
   {
     title: "World Radio Day",
+    description: "Celebrates radio's enduring role in information sharing, entertainment, and community building. The day recognizes radio as a powerful medium that continues to connect people and provide vital information, especially in remote areas.",
     organisation: "UN",
     industry: "Media and Communication",
     eventType: "International Days",
@@ -133,6 +149,7 @@ const demoEvents = [
   },
   {
     title: "Valentine's Day",
+    description: "A day celebrating love, romance, and affection between intimate companions. People exchange cards, flowers, chocolates, and gifts with loved ones while spending quality time together.",
     organisation: "Global",
     industry: "Social & Cultural",
     eventType: "Holiday",
@@ -141,6 +158,7 @@ const demoEvents = [
   },
   {
     title: "Democracy Day (Nepal)",
+    description: "Celebrates democratic values, political freedoms, and people's participation in governance. The day commemorates significant milestones in Nepal's journey toward establishing and strengthening democratic institutions.",
     organisation: "Government of Nepal",
     industry: "National Event",
     eventType: "National Days",
@@ -151,6 +169,7 @@ const demoEvents = [
   // 🌸 MARCH
   {
     title: "World Seagrass Day",
+    description: "Raises awareness about seagrass meadows and their critical role in marine ecosystems. These underwater plants provide habitat for marine life, store carbon, and protect coastlines from erosion.",
     organisation: "UN",
     industry: "Environment & Marine Ecology",
     eventType: "International Days",
@@ -159,6 +178,7 @@ const demoEvents = [
   },
   {
     title: "Zero Discrimination Day",
+    description: "Promotes equality and fights discrimination in all forms worldwide. The day calls for everyone to live with dignity regardless of age, gender, sexuality, nationality, ethnicity, religion, disability, or health status.",
     organisation: "UN",
     industry: "Human Rights & Equality",
     eventType: "International Days",
@@ -167,6 +187,7 @@ const demoEvents = [
   },
   {
     title: "World Wildlife Day",
+    description: "Celebrates the beauty and diversity of wild fauna and flora around the globe. The day raises awareness about conservation efforts and the urgent need to combat wildlife crime and habitat destruction.",
     organisation: "UN",
     industry: "Environment, Ecology & Conservation",
     eventType: "International Days",
@@ -175,6 +196,7 @@ const demoEvents = [
   },
   {
     title: "International Day for Ear and Hearing Care",
+    description: "Promotes ear and hearing health awareness and advocates for prevention of hearing loss. The day emphasizes early detection, treatment options, and the importance of protecting hearing throughout life.",
     organisation: "UN",
     industry: "Health & Medical Awareness",
     eventType: "International Days",
@@ -183,6 +205,7 @@ const demoEvents = [
   },
   {
     title: "International Women's Day",
+    description: "Celebrates women's social, economic, cultural, and political achievements globally. The day also serves as a call to action for accelerating gender equality and women's empowerment worldwide.",
     organisation: "UN",
     industry: "Gender Equality & Women Empowerment",
     eventType: "International Days",
@@ -191,6 +214,7 @@ const demoEvents = [
   },
   {
     title: "International Day of Women Judges",
+    description: "Recognizes women judges' vital contributions to justice systems and promoting equality under the law. The day highlights the importance of gender balance in the judiciary and celebrates female legal professionals.",
     organisation: "UN",
     industry: "Law & Gender Equality",
     eventType: "International Days",
@@ -199,6 +223,7 @@ const demoEvents = [
   },
   {
     title: "International Day to Combat Islamophobia",
+    description: "Addresses hatred, discrimination, and violence against Muslims worldwide. The day promotes interfaith dialogue, mutual respect, and understanding to counter prejudice and build inclusive societies.",
     organisation: "UN",
     industry: "Human Rights & Tolerance",
     eventType: "International Days",
@@ -207,6 +232,7 @@ const demoEvents = [
   },
   {
     title: "International Day of Happiness",
+    description: "Recognizes happiness as a universal human goal and fundamental human right. The day encourages people to focus on well-being, positive relationships, and creating happier, more sustainable communities.",
     organisation: "UN",
     industry: "Social Well-being & Mental Health",
     eventType: "International Days",
@@ -215,6 +241,7 @@ const demoEvents = [
   },
   {
     title: "International Day for the Elimination of Racial Discrimination",
+    description: "Combats racism, racial discrimination, and xenophobia in all their forms. The day promotes tolerance, inclusion, and respect for diversity while honoring victims of racial violence.",
     organisation: "UN",
     industry: "Human Rights & Anti-Discrimination",
     eventType: "International Days",
@@ -223,6 +250,7 @@ const demoEvents = [
   },
   {
     title: "World Poetry Day",
+    description: "Celebrates poetry's unique ability to capture the human spirit and cultural expression. The day recognizes poetry's role in promoting linguistic diversity and giving voice to marginalized communities.",
     organisation: "UN",
     industry: "Arts & Literature",
     eventType: "International Days",
@@ -231,6 +259,7 @@ const demoEvents = [
   },
   {
     title: "World Down Syndrome Day",
+    description: "Raises awareness about Down syndrome and advocates for rights, inclusion, and well-being of people with this condition. The day promotes acceptance and celebrates the contributions of individuals with Down syndrome to society.",
     organisation: "UN",
     industry: "Health & Disability Awareness",
     eventType: "International Days",
@@ -239,6 +268,7 @@ const demoEvents = [
   },
   {
     title: "International Day of Forests",
+    description: "Celebrates the importance of forests and trees to life on Earth. The day promotes sustainable forest management, conservation efforts, and awareness about deforestation's impact on climate and biodiversity.",
     organisation: "UN",
     industry: "Environment & Forestry",
     eventType: "International Days",
@@ -247,6 +277,7 @@ const demoEvents = [
   },
   {
     title: "International Nowruz Day",
+    description: "Celebrates the Persian New Year and spring equinox traditions shared across many cultures. This ancient festival promotes values of peace, solidarity, and cultural heritage through family gatherings and special rituals.",
     organisation: "UN",
     industry: "Culture & Heritage",
     eventType: "International Days",
@@ -255,6 +286,7 @@ const demoEvents = [
   },
   {
     title: "World Water Day",
+    description: "Highlights the critical importance of freshwater and advocates for sustainable management of water resources. The day addresses global water scarcity and the need for universal access to safe water and sanitation.",
     organisation: "UN",
     industry: "Environment & Water Resources",
     eventType: "International Days",
@@ -263,6 +295,7 @@ const demoEvents = [
   },
   {
     title: "World Meteorological Day",
+    description: "Celebrates weather science and its essential role in understanding climate and protecting society. The day recognizes meteorologists' work in weather forecasting, climate monitoring, and disaster risk reduction.",
     organisation: "UN",
     industry: "Science & Meteorology",
     eventType: "International Days",
@@ -271,6 +304,7 @@ const demoEvents = [
   },
   {
     title: "World Tuberculosis Day",
+    description: "Raises awareness about tuberculosis and global efforts to eliminate this preventable disease. The day highlights the need for better diagnosis, treatment access, and continued research to combat TB worldwide.",
     organisation: "UN",
     industry: "Health & Disease Prevention",
     eventType: "International Days",
@@ -279,6 +313,7 @@ const demoEvents = [
   },
   {
     title: "Ghode Jatra (Kathmandu Valley)",
+    description: "Traditional horse racing festival held at Tundikhel in Kathmandu celebrating victory over demons. According to legend, the festival's noise and celebration help keep evil spirits at bay while showcasing military prowess and cultural heritage.",
     organisation: "Nepal",
     industry: "Cultural",
     eventType: "Nepali Festivals",
@@ -289,6 +324,7 @@ const demoEvents = [
   // 🌷 APRIL
   {
     title: "World Autism Awareness Day",
+    description: "Promotes understanding, acceptance, and inclusion of people with autism spectrum disorder. The day aims to reduce stigma, celebrate neurodiversity, and advocate for support services and accommodations.",
     organisation: "UN",
     industry: "Health & Disability Awareness",
     eventType: "International Days",
@@ -297,6 +333,7 @@ const demoEvents = [
   },
   {
     title: "International Day for Mine Awareness and Assistance in Mine Action",
+    description: "Raises awareness about the dangers of landmines and explosive remnants of war. The day recognizes progress toward a mine-free world and honors those working to clear mines and support survivors.",
     organisation: "UN",
     industry: "Peace & Humanitarian Aid",
     eventType: "International Days",
@@ -305,6 +342,7 @@ const demoEvents = [
   },
   {
     title: "International Day of Sport for Development and Peace",
+    description: "Recognizes sport's powerful role in promoting peace, tolerance, and social development. The day celebrates how sports can bridge divides, empower communities, and contribute to achieving sustainable development goals.",
     organisation: "UN",
     industry: "Sports & Social Development",
     eventType: "International Days",
@@ -313,6 +351,7 @@ const demoEvents = [
   },
   {
     title: "World Health Day",
+    description: "Focuses global attention on critical health priorities and universal health coverage. Each year features a different theme addressing pressing health challenges facing humanity.",
     organisation: "UN",
     industry: "Health & Medicine",
     eventType: "International Days",
@@ -321,6 +360,7 @@ const demoEvents = [
   },
   {
     title: "International Day of Human Space Flight",
+    description: "Celebrates humanity's achievements in space exploration beginning with Yuri Gagarin's historic flight. The day recognizes space science and technology's contributions to advancing human knowledge and peaceful cooperation.",
     organisation: "UN",
     industry: "Science & Space Exploration",
     eventType: "International Days",
@@ -329,6 +369,7 @@ const demoEvents = [
   },
   {
     title: "Nepali New Year (Baisakh 1)",
+    description: "Traditional New Year celebration marking the beginning of the Nepali calendar's new year. Families gather for special meals, visit temples, and participate in cultural programs welcoming prosperity and good fortune.",
     organisation: "Government of Nepal",
     industry: "National / Cultural",
     eventType: "Nepali Festivals",
@@ -337,6 +378,7 @@ const demoEvents = [
   },
   {
     title: "International Mother Earth Day",
+    description: "Promotes environmental awareness and sustainable planetary stewardship for future generations. The day calls for harmony with nature and collective action to address climate change and environmental degradation.",
     organisation: "UN",
     industry: "Environment & Sustainability",
     eventType: "International Days",
@@ -345,6 +387,7 @@ const demoEvents = [
   },
   {
     title: "World Book and Copyright Day",
+    description: "Celebrates reading, publishing, and intellectual property protection worldwide. The day promotes books as windows to knowledge and encourages people of all ages to discover the pleasure of reading.",
     organisation: "UN",
     industry: "Education, Literature & Culture",
     eventType: "International Days",
@@ -353,6 +396,7 @@ const demoEvents = [
   },
   {
     title: "World Malaria Day",
+    description: "Highlights global efforts to prevent, control, and eliminate malaria. The day recognizes progress made while emphasizing the need for continued investment in research, prevention tools, and treatment access.",
     organisation: "UN",
     industry: "Health & Disease Prevention",
     eventType: "International Days",
@@ -361,6 +405,7 @@ const demoEvents = [
   },
   {
     title: "International Jazz Day",
+    description: "Celebrates jazz music's cultural diplomacy and its role in uniting people across borders. The day honors jazz's artistic excellence and its contribution to peace, dialogue, and freedom of expression.",
     organisation: "UN",
     industry: "Arts & Music",
     eventType: "International Days",
@@ -371,6 +416,7 @@ const demoEvents = [
   // 🌺 MAY
   {
     title: "Labour Day (International Workers' Day)",
+    description: "Honors workers' rights, achievements, and contributions to economic and social development. The day commemorates the labor movement's struggles for fair wages, reasonable hours, and safe working conditions.",
     organisation: "International Labour Organization",
     industry: "National / Labour",
     eventType: "National Days",
@@ -379,6 +425,7 @@ const demoEvents = [
   },
   {
     title: "World Press Freedom Day",
+    description: "Defends media independence, press freedom, and freedom of expression globally. The day honors journalists who risk their lives reporting the truth and highlights threats to independent journalism worldwide.",
     organisation: "UN",
     industry: "Media & Communication",
     eventType: "International Days",
@@ -387,6 +434,7 @@ const demoEvents = [
   },
   {
     title: "International Day of Families",
+    description: "Celebrates families' fundamental importance in society and promotes family well-being. The day raises awareness about social, economic, and demographic issues affecting families and encourages family-friendly policies.",
     organisation: "UN",
     industry: "Social Welfare & Family",
     eventType: "International Days",
@@ -395,6 +443,7 @@ const demoEvents = [
   },
   {
     title: "International Day of Living Together in Peace",
+    description: "Promotes peace, tolerance, inclusion, and solidarity among diverse communities. The day encourages people to live together in acceptance of differences and reject violence, fear, and discrimination.",
     organisation: "UN",
     industry: "Peace & Social Harmony",
     eventType: "International Days",
@@ -403,6 +452,7 @@ const demoEvents = [
   },
   {
     title: "International Day of Light",
+    description: "Celebrates light's fundamental role in science, technology, art, culture, and sustainable development. The day highlights light-based technologies' contributions to medicine, communications, energy, and education worldwide.",
     organisation: "UN",
     industry: "Science & Technology",
     eventType: "International Days",
@@ -411,6 +461,7 @@ const demoEvents = [
   },
   {
     title: "World Telecommunication and Information Society Day",
+    description: "Highlights information and communication technologies' potential for social and economic development. The day promotes digital inclusion and the importance of ICT infrastructure for connecting communities globally.",
     organisation: "UN",
     industry: "Technology & Communication",
     eventType: "International Days",
@@ -419,6 +470,7 @@ const demoEvents = [
   },
   {
     title: "World Bee Day",
+    description: "Raises awareness about bees' vital role in pollination and maintaining healthy ecosystems. The day highlights threats facing bees and other pollinators while promoting sustainable practices to protect them.",
     organisation: "UN",
     industry: "Environment & Biodiversity",
     eventType: "International Days",
@@ -427,6 +479,7 @@ const demoEvents = [
   },
   {
     title: "World Day for Cultural Diversity for Dialogue and Development",
+    description: "Celebrates the richness of world cultures and promotes intercultural dialogue and understanding. The day emphasizes cultural diversity as a driver of development and tool for achieving peace and sustainability.",
     organisation: "UN",
     industry: "Culture & Society",
     eventType: "International Days",
@@ -435,6 +488,7 @@ const demoEvents = [
   },
   {
     title: "International Day for Biological Diversity",
+    description: "Highlights biodiversity's critical importance for sustainable development and human survival. The day raises awareness about species loss and ecosystem degradation while promoting conservation efforts worldwide.",
     organisation: "UN",
     industry: "Environment & Biodiversity",
     eventType: "International Days",
@@ -443,6 +497,7 @@ const demoEvents = [
   },
   {
     title: "International Day of UN Peacekeepers",
+    description: "Honors peacekeepers' service, dedication, and sacrifices in conflict zones around the world. The day pays tribute to those who have lost their lives serving peace and recognizes peacekeeping contributions to global security.",
     organisation: "UN",
     industry: "Peace & Security",
     eventType: "International Days",
@@ -451,16 +506,17 @@ const demoEvents = [
   },
   {
     title: "World No Tobacco Day",
+    description: "Raises awareness about tobacco's devastating health, social, and economic consequences. The day advocates for effective tobacco control policies and supports people trying to quit smoking worldwide.",
     organisation: "UN",
     industry: "Health & Awareness",
     eventType: "International Days",
     repeatsYearly: true,
     date: { day: 31, month: "May", year: 2025 },
   },
-
   // ☀️ JUNE
   {
     title: "Global Day of Parents",
+    description: "Celebrates parents' selfless commitment to their children and recognizes their sacrifices in nurturing future generations. The day honors all parents worldwide and promotes family values, unity, and the fundamental role of parenting in society.",
     organisation: "UN",
     industry: "Social Welfare & Family",
     eventType: "International Days",
@@ -469,6 +525,7 @@ const demoEvents = [
   },
   {
     title: "World Bicycle Day",
+    description: "Celebrates the bicycle as a simple, affordable, and environmentally sustainable mode of transportation. The day promotes cycling for health benefits, reduced carbon emissions, and improved urban mobility worldwide.",
     organisation: "UN",
     industry: "Health, Environment & Transport",
     eventType: "International Days",
@@ -477,6 +534,7 @@ const demoEvents = [
   },
   {
     title: "World Environment Day",
+    description: "The UN's principal platform for encouraging worldwide awareness and action for environmental protection. The day mobilizes governments, businesses, and citizens to address pressing environmental issues and promote sustainable practices.",
     organisation: "UN",
     industry: "Environment & Sustainability",
     eventType: "International Days",
@@ -485,6 +543,7 @@ const demoEvents = [
   },
   {
     title: "World Oceans Day",
+    description: "Celebrates the ocean's vital role in sustaining life on Earth and human livelihoods. The day raises awareness about ocean pollution, overfishing, and climate change impacts while promoting marine conservation efforts.",
     organisation: "UN",
     industry: "Environment & Marine Conservation",
     eventType: "International Days",
@@ -493,6 +552,7 @@ const demoEvents = [
   },
   {
     title: "World Day Against Child Labour",
+    description: "Highlights the plight of child laborers and mobilizes action to eliminate child labor worldwide. The day advocates for children's rights to education, protection, and childhood free from exploitation and harmful work.",
     organisation: "UN",
     industry: "Human Rights & Child Protection",
     eventType: "International Days",
@@ -501,6 +561,7 @@ const demoEvents = [
   },
   {
     title: "World Blood Donor Day",
+    description: "Thanks voluntary blood donors and raises awareness about the need for safe blood donations. The day emphasizes how regular blood donation can save lives and encourages people to become lifelong donors.",
     organisation: "UN",
     industry: "Health & Medical Awareness",
     eventType: "International Days",
@@ -509,6 +570,7 @@ const demoEvents = [
   },
   {
     title: "World Refugee Day",
+    description: "Honors the courage, strength, and resilience of millions of refugees worldwide. The day raises awareness about refugees' plight and celebrates their contributions to host communities while advocating for their protection.",
     organisation: "UN",
     industry: "Human Rights & Humanitarian",
     eventType: "International Days",
@@ -517,6 +579,7 @@ const demoEvents = [
   },
   {
     title: "International Day of Yoga",
+    description: "Celebrates the ancient practice of yoga and its holistic approach to health and well-being. The day promotes yoga's physical, mental, and spiritual benefits and encourages people worldwide to adopt this healthy lifestyle.",
     organisation: "UN",
     industry: "Health & Well-being",
     eventType: "International Days",
@@ -525,6 +588,7 @@ const demoEvents = [
   },
   {
     title: "International Day against Drug Abuse and Illicit Trafficking",
+    description: "Raises awareness about the major problem that illicit drugs pose to society and health. The day strengthens action and cooperation to achieve a drug-free world through prevention, treatment, and law enforcement.",
     organisation: "UN",
     industry: "Health & Law Enforcement",
     eventType: "International Days",
@@ -535,6 +599,7 @@ const demoEvents = [
   // 🌞 JULY
   {
     title: "International Day of the World's Indigenous Peoples",
+    description: "Celebrates indigenous peoples' rich cultures, languages, and traditional knowledge systems. The day raises awareness about challenges facing indigenous communities and promotes their rights to self-determination and cultural preservation.",
     organisation: "UN",
     industry: "Human Rights & Culture",
     eventType: "International Days",
@@ -543,6 +608,7 @@ const demoEvents = [
   },
   {
     title: "World Population Day",
+    description: "Raises awareness about global population issues and their impact on development and the environment. The day focuses on reproductive health, gender equality, and the importance of sustainable population policies.",
     organisation: "UN",
     industry: "Social Development & Demographics",
     eventType: "International Days",
@@ -551,6 +617,7 @@ const demoEvents = [
   },
   {
     title: "International Youth Day",
+    description: "Celebrates young people's voices and recognizes their contributions to society and development. The day promotes youth engagement in decision-making processes and addresses challenges facing young generations worldwide.",
     organisation: "UN",
     industry: "Youth Development & Education",
     eventType: "International Days",
@@ -559,6 +626,7 @@ const demoEvents = [
   },
   {
     title: "World Humanitarian Day",
+    description: "Honors humanitarian workers who risk their lives to help others in crisis situations. The day pays tribute to those who have lost their lives in humanitarian service and raises awareness about humanitarian needs worldwide.",
     organisation: "UN",
     industry: "Humanitarian & Social Work",
     eventType: "International Days",
@@ -567,6 +635,7 @@ const demoEvents = [
   },
   {
     title: "International Day of Friendship",
+    description: "Celebrates the power of friendship in promoting peace, happiness, and unity across diverse communities. The day encourages building bridges between peoples, cultures, and nations through mutual understanding and respect.",
     organisation: "UN",
     industry: "Social Harmony & Peace",
     eventType: "International Days",
@@ -577,6 +646,7 @@ const demoEvents = [
   // 🌻 AUGUST
   {
     title: "International Day of the World's Indigenous Peoples",
+    description: "Celebrates indigenous peoples' rich cultures, languages, and traditional knowledge systems. The day raises awareness about challenges facing indigenous communities and promotes their rights to self-determination and cultural preservation.",
     organisation: "UN",
     industry: "Human Rights & Culture",
     eventType: "International Days",
@@ -585,6 +655,7 @@ const demoEvents = [
   },
   {
     title: "International Youth Day",
+    description: "Celebrates young people's voices and recognizes their contributions to society and development. The day promotes youth engagement in decision-making processes and addresses challenges facing young generations worldwide.",
     organisation: "UN",
     industry: "Youth Development & Education",
     eventType: "International Days",
@@ -593,6 +664,7 @@ const demoEvents = [
   },
   {
     title: "World Humanitarian Day",
+    description: "Honors humanitarian workers who risk their lives to help others in crisis situations. The day pays tribute to those who have lost their lives in humanitarian service and raises awareness about humanitarian needs worldwide.",
     organisation: "UN",
     industry: "Humanitarian & Social Work",
     eventType: "International Days",
@@ -603,6 +675,7 @@ const demoEvents = [
   // 🍂 SEPTEMBER
   {
     title: "International Day of Charity",
+    description: "Recognizes the role of charity in alleviating humanitarian crises and human suffering. The day encourages charitable activities and mobilizes people, NGOs, and stakeholders to help others through volunteer and philanthropic work.",
     organisation: "UN",
     industry: "Social Welfare & Philanthropy",
     eventType: "International Days",
@@ -611,6 +684,7 @@ const demoEvents = [
   },
   {
     title: "International Literacy Day",
+    description: "Highlights the importance of literacy as a foundation for human dignity and human rights. The day promotes literacy as a tool for empowerment and sustainable development, addressing global illiteracy challenges.",
     organisation: "UN",
     industry: "Education & Literacy",
     eventType: "International Days",
@@ -619,6 +693,7 @@ const demoEvents = [
   },
   {
     title: "Constitution / National Day",
+    description: "Commemorates the promulgation of Nepal's constitution and celebrates the nation's sovereignty and identity. The day marks the adoption of democratic values and constitutional governance with official ceremonies and patriotic celebrations.",
     organisation: "Government of Nepal",
     industry: "National Days",
     eventType: "National Days",
@@ -627,6 +702,7 @@ const demoEvents = [
   },
   {
     title: "World Tourism Day",
+    description: "Celebrates tourism's social, cultural, political, and economic value worldwide. The day raises awareness about tourism's role in sustainable development and promoting cultural understanding between nations.",
     organisation: "UN",
     industry: "Tourism & Culture",
     eventType: "International Days",
@@ -637,6 +713,7 @@ const demoEvents = [
   // 🍂 OCTOBER
   {
     title: "International Day of Older Persons",
+    description: "Celebrates older persons' contributions to society and raises awareness about aging issues. The day promotes dignity, rights, and well-being of elderly people while addressing challenges of an aging population.",
     organisation: "UN",
     industry: "Social Welfare & Elderly Rights",
     eventType: "International Days",
@@ -645,6 +722,7 @@ const demoEvents = [
   },
   {
     title: "International Day of Non-Violence",
+    description: "Commemorates Mahatma Gandhi's birthday and promotes non-violence through education and public awareness. The day emphasizes the universal relevance of non-violent resistance and peaceful conflict resolution.",
     organisation: "UN",
     industry: "Peace & Social Harmony",
     eventType: "International Days",
@@ -653,6 +731,7 @@ const demoEvents = [
   },
   {
     title: "World Teachers' Day",
+    description: "Celebrates teachers' essential role in providing quality education and shaping future generations. The day recognizes teachers' contributions, addresses their challenges, and advocates for better teaching conditions worldwide.",
     organisation: "UN",
     industry: "Education & Teaching",
     eventType: "International Days",
@@ -661,6 +740,7 @@ const demoEvents = [
   },
   {
     title: "World Mental Health Day",
+    description: "Raises awareness about mental health issues and mobilizes efforts to support mental health worldwide. The day promotes mental well-being, fights stigma, and advocates for accessible mental health services for all.",
     organisation: "UN",
     industry: "Health & Mental Health",
     eventType: "International Days",
@@ -669,6 +749,7 @@ const demoEvents = [
   },
   {
     title: "World Food Day",
+    description: "Commemorates the founding of the Food and Agriculture Organization and raises awareness about hunger and food security. The day promotes global efforts to ensure everyone has access to sufficient, safe, and nutritious food.",
     organisation: "UN",
     industry: "Food Security & Agriculture",
     eventType: "International Days",
@@ -679,6 +760,7 @@ const demoEvents = [
   // 🍁 NOVEMBER
   {
     title: "Universal Children's Day",
+    description: "Celebrates children's rights and promotes international togetherness and awareness among children worldwide. The day advocates for improving children's welfare through education, protection, and ensuring their voices are heard in society.",
     organisation: "UN",
     industry: "Child Rights & Welfare",
     eventType: "International Days",
@@ -689,6 +771,7 @@ const demoEvents = [
   // ❄️ DECEMBER
   {
     title: "World AIDS Day",
+    description: "Raises awareness about HIV/AIDS and commemorates those who have died from the disease. The day promotes HIV prevention, testing, treatment access, and fights stigma and discrimination against people living with HIV/AIDS.",
     organisation: "UN",
     industry: "Health & Disease Awareness",
     eventType: "International Days",
@@ -697,6 +780,7 @@ const demoEvents = [
   },
   {
     title: "International Day of Persons with Disabilities",
+    description: "Promotes the rights, dignity, and well-being of persons with disabilities in all spheres of society. The day raises awareness about disability issues and advocates for accessible, inclusive environments and equal opportunities.",
     organisation: "UN",
     industry: "Disability Rights & Awareness",
     eventType: "International Days",
@@ -705,6 +789,7 @@ const demoEvents = [
   },
   {
     title: "Human Rights Day",
+    description: "Commemorates the adoption of the Universal Declaration of Human Rights and celebrates fundamental freedoms. The day promotes awareness about human rights issues and encourages action to defend everyone's dignity and equality.",
     organisation: "UN",
     industry: "Human Rights & Social Justice",
     eventType: "International Days",
@@ -713,6 +798,7 @@ const demoEvents = [
   },
   {
     title: "Christmas Day",
+    description: "Christian celebration commemorating the birth of Jesus Christ observed by billions worldwide. The day brings families together for festive meals, gift-giving, and religious services while spreading messages of peace, love, and goodwill.",
     organisation: "Global",
     industry: "Religious & Cultural",
     eventType: "Holiday",

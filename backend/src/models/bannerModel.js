@@ -1,5 +1,5 @@
 // backend/src/models/bannerModel.js
-const {Schema, model} = require('mongoose');
+const { Schema, model } = require('mongoose');
 
 const BannerSchema = new Schema({
   filename: String,
@@ -7,7 +7,8 @@ const BannerSchema = new Schema({
   size: Number,
   mimeType: String,
   dateFor: { type: String },
-  viewType: { type: String }
+  viewType: { type: String },
+  event: { type: Schema.Types.ObjectId, ref: 'Event' }  // <--- new
 }, { timestamps: true });
 
 module.exports = model('Banner', BannerSchema);
