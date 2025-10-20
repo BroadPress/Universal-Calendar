@@ -40,9 +40,15 @@ export default function CalendarGrid({ selectedTypes }) {
         const response = await axios.get('http://localhost:5000/api/events', {
           params: { year: currentYear, month: currentDate.format('MMMM') },
         });
-        const filteredEvents = selectedTypes.length > 0
-          ? response.data.filter(ev => selectedTypes.some(sel => typeMap[sel] === ev.eventType))
-          : response.data;
+
+        // ✅ Filter events based on selected categories
+        const filteredEvents =
+          selectedTypes.length === 0
+            ? []
+            : response.data.filter((ev) =>
+              selectedTypes.some((sel) => typeMap[sel] === ev.eventType)
+            );
+
         setEvents(filteredEvents);
       } catch (error) {
         console.error('Failed to fetch events:', error);
@@ -186,8 +192,8 @@ export default function CalendarGrid({ selectedTypes }) {
                 setMonth(dayjs(month).subtract(1, "month").format("YYYY-MM"))
               }
               className={`px-4 py-2 text-sm rounded border border-gray-300 ${dayjs(month).subtract(1, "month").year() < MIN_YEAR
-                  ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-                  : "bg-gray-200 hover:bg-gray-300"
+                ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                : "bg-gray-200 hover:bg-gray-300"
                 }`}
               disabled={dayjs(month).subtract(1, "month").year() < MIN_YEAR}
             >
@@ -204,8 +210,8 @@ export default function CalendarGrid({ selectedTypes }) {
             <button
               onClick={() => setMonth(dayjs(month).add(1, "month").format("YYYY-MM"))}
               className={`px-4 py-2 text-sm rounded border border-gray-300 ${dayjs(month).add(1, "month").year() > MAX_YEAR
-                  ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-                  : "bg-gray-200 hover:bg-gray-300"
+                ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                : "bg-gray-200 hover:bg-gray-300"
                 }`}
               disabled={dayjs(month).add(1, "month").year() > MAX_YEAR}
             >
