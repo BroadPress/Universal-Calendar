@@ -2,6 +2,8 @@ const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
 const generateTokenAndSetCookie = require("../utils/generateTokenAndSetCookie");
+const verifyCaptcha = require("../utils/verifyCaptcha");
+
 
 const signup = async (req, res) => {
   try {
@@ -41,7 +43,13 @@ const signup = async (req, res) => {
 
 const login = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, captchaToken } = req.body;
+
+    // Verify captcha first
+    const isCaptchaValid = await verifyCaptcha(captchaToken);
+    if (!isCaptchaValid) {
+      return res.status(400).json({ message: "Captcha verification failed" });
+    }
 
     const user = await User.findOne({ email });
     if (!user)
@@ -88,4 +96,4 @@ const checkAuth = async (req, res) => {
   }
 };
 
-module.exports = { signup, login, logout, checkAuth};
+module.exports = { signup, login, logout, checkAuth };

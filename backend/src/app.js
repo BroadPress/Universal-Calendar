@@ -1,5 +1,6 @@
 const express = require('express');
 const morgan = require("morgan");
+const cookieParser = require("cookie-parser");
 const customCors = require("./config/cors");
 const path = require('path');
 
@@ -14,7 +15,9 @@ const app = express();
 // Middleware
 app.use(morgan("dev"));
 app.use(express.json());
+app.use(cookieParser());
 app.use(customCors);
+
 
 // Static files
 app.use('/uploads', express.static(path.join(__dirname, 'public', 'uploads')));
