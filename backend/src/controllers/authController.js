@@ -1,5 +1,6 @@
 const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const axios = require("axios");
 const User = require("../models/userModel");
 const generateTokenAndSetCookie = require("../utils/generateTokenAndSetCookie");
 const verifyCaptcha = require("../utils/verifyCaptcha");
@@ -7,27 +8,39 @@ const verifyCaptcha = require("../utils/verifyCaptcha");
 
 const signup = async (req, res) => {
   try {
-    const { username, email, password } = req.body;
+    const { name, email, password, captchaToken } = req.body;
 
-    if (!username || !email || !password) {
+    // ✅ Check all fields
+    if (!name || !email || !password || !captchaToken) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
+    // ✅ Verify reCAPTCHA
+    const captchaSecret = process.env.RECAPTCHA_SECRET_KEY;
+    const verifyURL = `https://www.google.com/recaptcha/api/siteverify?secret=${captchaSecret}&response=${captchaToken}`;
+    const { data } = await axios.post(verifyURL);
+
+    if (!data.success) {
+      return res.status(400).json({ message: "CAPTCHA verification failed" });
+    }
+
+    // ✅ Check if email already exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ message: "Email already registered" });
     }
 
-    // ✅ Hash password here (as you requested)
+    // ✅ Hash password
     const hashedPassword = await bcryptjs.hash(password, 10);
 
+    // ✅ Create user
     const user = await User.create({
-      username,
+      username: name, // match frontend 'name'
       email,
       password: hashedPassword,
     });
 
-    // ✅ Set cookie and token
+    // ✅ Set token cookie
     generateTokenAndSetCookie(res, user._id);
 
     res.status(201).json({

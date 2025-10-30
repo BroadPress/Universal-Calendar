@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import CalendarGrid from "./components/CalendarGrid";
 import AdminLogin from "./pages/AdminLogin";
+import AdminSignup from "./pages/AdminSignup";
 
 export default function App() {
   const [selectedTypes, setSelectedTypes] = useState([]);
@@ -13,6 +14,7 @@ export default function App() {
       <Routes>
         {/* Login page */}
         <Route path="/login" element={<AdminLogin />} />
+        <Route path="/signup" element={<AdminSignup />} />
 
         {/* Main calendar page with sidebar */}
         <Route
