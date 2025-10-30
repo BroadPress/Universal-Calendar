@@ -1,11 +1,12 @@
-// frontend/src/components/Sidebar.jsx
 import { useState, useEffect } from "react";
 import dayjs from "dayjs";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import api from "../api/api"; // use preconfigured Axios instance
 
 const Sidebar = ({ selectedTypes, setSelectedTypes }) => {
   const [weekday, setWeekday] = useState('');
   const [todaysEvents, setTodaysEvents] = useState([]);
+  const navigate = useNavigate();
 
   const calendarCategories = [
     'Holidays', 'Festivals', 'International Days', 'National Days',
@@ -19,7 +20,7 @@ const Sidebar = ({ selectedTypes, setSelectedTypes }) => {
       setWeekday(today.format('dddd').toUpperCase());
 
       try {
-        const response = await axios.get('http://localhost:5000/api/events', {
+        const response = await api.get('/events', {
           params: {
             year: today.year(),
             month: today.format('MMMM')
@@ -55,51 +56,72 @@ const Sidebar = ({ selectedTypes, setSelectedTypes }) => {
     );
   };
 
+  // ✅ Handle logout
+  const handleLogout = async () => {
+    try {
+      await api.post("/auth/logout");
+      navigate("/login");
+    } catch (err) {
+      console.error("Logout failed:", err);
+      alert("Failed to logout. Try again.");
+    }
+  };
+
   return (
     <aside className="w-72 p-10 border-r border-gray-300 sticky top-0 h-screen bg-white overflow-y-auto">
-  <div className="mb-8 flex justify-center">
-    <img src="/images/sriyog-logo.svg" alt="Logo" className="h-12 object-contain" />
-  </div>
-
-  <div className="left-date flex flex-col items-center mt-6">
-    <div className="big-num text-5xl font-bold">{dayjs().date()}</div>
-    <div className="weekday text-2xl mt-2">{weekday}</div>
-  </div>
-
-  <div className="mt-10">
-    <h4 className="font-semibold">All Calendar</h4>
-    <ul className="mt-4 space-y-3">
-      {calendarCategories.map((x) => (
-        <li key={x} className="flex items-center gap-3">
-          <input
-            type="checkbox"
-            checked={selectedTypes.includes(x)}
-            onChange={() => handleToggle(x)}
-          />
-          <span className="text-sm text-gray-700">{x}</span>
-        </li>
-      ))}
-    </ul>
-  </div>
-
-  <div className="mt-8 border-t pt-6">
-    <h5 className="text-sm text-gray-500">Today's Attraction</h5>
-    {todaysEvents.length > 0 ? (
-      todaysEvents.map(event => (
-        <div key={event._id} className="mt-4 p-4 border rounded bg-white">
-          <div className="text-xs text-gray-400">
-            {dayjs(`${event.date.year}-${event.date.month}-${event.date.day}`).format('YYYY-MM-DD')}
-          </div>
-          <div className="mt-3 font-medium">{event.title}</div>
-        </div>
-      ))
-    ) : (
-      <div className="mt-4 p-4 border rounded bg-white text-gray-400">
-        No events today
+      <div className="mb-8 flex justify-center">
+        <img src="/images/sriyog-logo.svg" alt="Logo" className="h-12 object-contain" />
       </div>
-    )}
-  </div>
-</aside>
+
+      <div className="left-date flex flex-col items-center mt-6">
+        <div className="big-num text-5xl font-bold">{dayjs().date()}</div>
+        <div className="weekday text-2xl mt-2">{weekday}</div>
+      </div>
+
+      <div className="mt-10">
+        <h4 className="font-semibold">All Calendar</h4>
+        <ul className="mt-4 space-y-3">
+          {calendarCategories.map((x) => (
+            <li key={x} className="flex items-center gap-3">
+              <input
+                type="checkbox"
+                checked={selectedTypes.includes(x)}
+                onChange={() => handleToggle(x)}
+              />
+              <span className="text-sm text-gray-700">{x}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="mt-8 border-t pt-6">
+        <h5 className="text-sm text-gray-500">Today's Attraction</h5>
+        {todaysEvents.length > 0 ? (
+          todaysEvents.map(event => (
+            <div key={event._id} className="mt-4 p-4 border rounded bg-white">
+              <div className="text-xs text-gray-400">
+                {dayjs(`${event.date.year}-${event.date.month}-${event.date.day}`).format('YYYY-MM-DD')}
+              </div>
+              <div className="mt-3 font-medium">{event.title}</div>
+            </div>
+          ))
+        ) : (
+          <div className="mt-4 p-4 border rounded bg-white text-gray-400">
+            No events today
+          </div>
+        )}
+      </div>
+
+      {/* ✅ Logout Button */}
+      <div className="mt-8">
+        <button
+          onClick={handleLogout}
+          className="w-full bg-red-600 text-white py-2 rounded hover:bg-red-700 transition duration-200"
+        >
+          Logout
+        </button>
+      </div>
+    </aside>
   );
 };
 

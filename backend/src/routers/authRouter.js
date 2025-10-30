@@ -7,6 +7,6 @@ const { signup, login, logout, checkAuth } = require("../controllers/authControl
 authRouter.post("/signup", signup);
 authRouter.post("/login", login);
 authRouter.post("/logout", logout);
-authRouter.get("/check-auth", checkAuth);
+authRouter.get("/check", checkAuth);
 
 module.exports = authRouter;
